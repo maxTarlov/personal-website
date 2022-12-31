@@ -5,7 +5,7 @@ permalink: /interview-bot-tutorial/
 redirect: https://colab.research.google.com/gist/maxTarlov/6c8318ef10059d4ac5830cf34161e72e/interview-bot-part-one.ipynb
 ---
 
-Job interviews are _tedious_. **I'll show you how to automate them instead.** \| [Google Colab](https://colab.research.google.com/gist/maxTarlov/6c8318ef10059d4ac5830cf34161e72e/interview-bot-part-one.ipynb) \| [GitHub Gist](https://gist.github.com/maxTarlov/6c8318ef10059d4ac5830cf34161e72e)
+Job interviews are _tedious_. **I'll show you how to automate them instead.** \| Open in [Google Colab](https://colab.research.google.com/gist/maxTarlov/6c8318ef10059d4ac5830cf34161e72e/interview-bot-part-one.ipynb) or [GitHub Gist](https://gist.github.com/maxTarlov/6c8318ef10059d4ac5830cf34161e72e).
 
 I highly recomend that you [open in Google Colab](https://colab.research.google.com/gist/maxTarlov/6c8318ef10059d4ac5830cf34161e72e/interview-bot-part-one.ipynb) so that you can run the notebook and interact with the bot in a free virtual machine.
 
