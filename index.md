@@ -9,10 +9,14 @@ I like languages&mdash;natural languages and programming languages&mdash;and in 
 I am a professional linguistics nerd interested in linguistics, software development, and natural language processing. You can check out some of my projects on [GitHub](https://github.com/maxTarlov), or connect with me on [LinkedIn](https://linkedin.com/in/maxtarlov).
 
 <ul>
-  {% for post in site.posts %}
+  {% for project in site.projects %}
     <li>
-      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-      {{ post.excerpt }}
+      {% if project.redirect %}
+        <h2><a href="{{ project.redirect }}">{{ project.title }}</a></h2>
+      {% else %}
+        <h2><a href="{{ project.url }}">{{ project.title }}</a></h2>
+      {% endif %}
+      {{ project.excerpt }}
     </li>
   {% endfor %}
 </ul>
