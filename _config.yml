@@ -6,3 +6,7 @@ theme: jekyll-theme-cayman
 collections:
   projects:
     output: true
+    order:
+      - interview-bot-demo.md
+      - interview-bot-nb.md
+      - SPOT.md
