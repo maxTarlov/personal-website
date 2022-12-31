@@ -1,6 +1,6 @@
 ---
 layout: page
-title: SPOT @ UCSC
+title: Syntax Prosody in Optimality Theory (SPOT)
 redirect: https://spot.sites.ucsc.edu/
 ---
 
