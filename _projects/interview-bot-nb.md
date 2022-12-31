@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Interview Bot Tutorial
-permalink: /interview-bot-tutorial/
 redirect: https://colab.research.google.com/gist/maxTarlov/6c8318ef10059d4ac5830cf34161e72e/interview-bot-part-one.ipynb
 ---
 
