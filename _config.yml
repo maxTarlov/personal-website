@@ -3,8 +3,9 @@ description: A linguistics and natural language processing specialist in the SF 
 show_downloads: false
 # google_analytics:
 theme: jekyll-theme-cayman
-page_excerpts: true
 collections:
+  info_pages:
+    output: true
   projects:
     output: true
     order:

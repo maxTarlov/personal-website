@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About Me
+permalink: /about/
 excerpt_separator: <!--more-->
 ---
 

@@ -4,8 +4,7 @@ layout: default
 
 # About Me
 <div class="excerpt truncated">
-  {% assign about_page = site.pages | first %}
-  <!-- I hope I don't add any pages alphabetically before "about.md" -->
+  {% assign about_page = site.info_pages | first %}
   {{ about_page.excerpt }}
   <a href="/about">Read more</a>
 </div>
