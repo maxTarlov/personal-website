@@ -10,7 +10,7 @@ div.excerpt {
 }
 
 div.truncated p:last-of-type::after {
-    content: " ...";
+    content: " \2026";
 }
 
 h2 a {
