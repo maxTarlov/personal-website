@@ -1,0 +1,100 @@
+<?xml version = "1.0"?>
+<?xml-stylesheet type="text/xsl" href="resume.xsl"?>
+<data>
+    <contact>
+        <name>Max M. Tarlov</name>
+        <url href="https://max.tarlov.dev">max.tarlov.dev</url>
+    </contact>
+    <section type="skills">
+        <header>Skills</header>
+        <item>
+            Python
+            <alt>Python (Programming Language)</alt>
+        </item>
+        <item>
+            SQL
+            <alt>Structured Query Language</alt>
+            <alt>Structured Query Language (SQL)</alt>
+        </item>
+        <item>
+            JavaScript
+            <alt>ECMAScript</alt>
+            <alt>ECMAScript (JavaScript)</alt>
+        </item>
+        <item>
+            Excel
+            <alt>Microsoft Excel</alt>
+            <alt>MS Excel</alt>
+        </item>
+        <item>Pivot Tables</item>
+        <item>Linguistic Data Analysis</item>
+        <item>Natural Language Processing</item>
+        <item>Research</item>
+        <item>Succinct Writing</item>
+        <item>Spanish</item>
+    </section>
+    <section type="experience">
+        <header>Experience</header>
+        <item>
+            <company>Google (via Intellipro Group)</company>
+            <job-title>Analyst III</job-title>
+            <dates>
+                <start>JANUARY 2022</start>
+                <end>PRESENT</end>
+            </dates>
+            <details>
+                <item>Label customer support interactions for use in advanced natural language understanding models.</item>
+                <item>Learn about deep neural networks to optimize labeling process.</item>
+                <item>Collaborate with management to align taxonomies with business goals.</item>
+            </details>
+        </item>
+        <item>
+            <company>LinkedIn (via WorkforceLogiq)</company>
+            <job-title>Engineering Linguist</job-title>
+            <dates>
+                <start>FEBRUARY 2021</start>
+                <end>DECEMBER 2021</end>
+            </dates>
+            <details>
+                <item>Implemented labeling pipeline for classification of search result quality.</item>
+                <item>Improved annotation guidelines, leading to 15% increase in reliability.</item>
+            </details>
+        </item>
+        <item>
+            <company>SPOT (UCSC Linguistics Department)</company>
+            <job-title>Research Assistant</job-title>
+            <dates>
+                <start>JUNE 2019</start>
+                <end>FEBRUARY 2021</end>
+            </dates>
+            <details>
+                <item>Authored 15k+ word technical report on applications of our software.</item>
+                <item>Spearheaded transition to test-driven development.</item>
+                <item>Bridged the gap between engineering and linguistic knowledge in onboarding process for all 5 new team members.</item>
+            </details>
+        </item>
+        <item>
+            <company>Canyon Market</company>
+            <job-title>My Family's Grocery Store</job-title>
+            <details>
+                <item>Trained in many roles, including grocery stocker, cashier, and barista.</item>
+                <item>Worked with all departments to ensure smooth day-to-day operation.</item>
+            </details>
+        </item>
+    </section>
+    <section type="education">
+        <header>Education</header>
+        <item>
+            <school>University of California at Santa Cruz</school>
+            <degree>B.A. in Linguistics</degree>
+            <dates>
+                <start>SEPTEMBER 2017</start>
+                <end>JUNE 2020</end>
+            </dates>
+            <honors>
+                <item>Highest honors in the linguistics major</item>
+                <item>Summa cum laude</item>
+            </honors>
+        </item>
+    </section>
+</data>
