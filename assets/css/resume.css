@@ -1,0 +1,9 @@
+li.item-skills {
+    display: inline;
+}
+
+li.item-skills:not(:last-of-type)::after {
+    content: " \2022\ ";
+}
+
+

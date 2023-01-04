@@ -10,19 +10,19 @@
     </body>
     </html>
 </xsl:template>
-<xsl:template match="data">
+<xsl:template match="data/contact">
     <div class="title"> <!-- Maybe a header? -->
-        <h1><xsl:value-of select="contact/name"/></h1>
-        <a href="{contact/url/@href}"><xsl:value-of select="contact/url"/></a>
+        <h1><xsl:value-of select="name"/></h1>
+        <a href="{url/@href}"><xsl:value-of select="url"/></a>
     </div>
-    <xsl:for-each select="section">
-        <ul class="section section-{@type}">
-            <xsl:apply-templates/>
-        </ul>
-    </xsl:for-each>
 </xsl:template>
-<xsl:template match="header">
-    <h2><xsl:apply-templates/></h2>
+<xsl:template match="data/section">
+    <div class="section section-{@type}">
+        <h2><xsl:value-of select="header"/></h2>
+        <ul>
+            <xsl:apply-templates select="item"/>
+        </ul>
+    </div>
 </xsl:template>
 <xsl:template match="item">
     <li class="item item-{../@type}">
@@ -34,4 +34,11 @@
         <xsl:apply-templates/>
     </li>
 </xsl:template>
+<xsl:template match="details">
+    <ul class="details">
+        <xsl:apply-templates/>
+    </ul>
+</xsl:template>
+<!-- <xsl:template>
+</xsl:template> -->
 </xsl:stylesheet>
