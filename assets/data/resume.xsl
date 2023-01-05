@@ -13,7 +13,11 @@
 <xsl:template match="data/contact">
     <div class="title"> <!-- Maybe a header? -->
         <h1><xsl:value-of select="name"/></h1>
-        <p><a href="{url/@href}"><xsl:value-of select="url"/></a></p>
+        <p>
+            <xsl:value-of select="location"/>
+            <br/>
+            <a href="{url/@href}"><xsl:value-of select="url"/></a>
+        </p>
     </div>
 </xsl:template>
 <xsl:template match="data/section">
