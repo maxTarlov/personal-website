@@ -13,31 +13,48 @@
 <xsl:template match="data/contact">
     <div class="title"> <!-- Maybe a header? -->
         <h1><xsl:value-of select="name"/></h1>
-        <a href="{url/@href}"><xsl:value-of select="url"/></a>
+        <p><a href="{url/@href}"><xsl:value-of select="url"/></a></p>
     </div>
 </xsl:template>
 <xsl:template match="data/section">
     <div class="section section-{@type}">
-        <h2><xsl:value-of select="header"/></h2>
-        <ul>
-            <xsl:apply-templates select="item"/>
-        </ul>
+        <xsl:apply-templates/>
     </div>
 </xsl:template>
-<xsl:template match="item">
-    <li class="item item-{../@type}">
-        <xsl:apply-templates/>
-    </li>
-</xsl:template>
-<xsl:template match="item/alt">
-    <li style="display: none;">
-        <xsl:apply-templates/>
-    </li>
+<xsl:template match="header">
+    <h2><xsl:apply-templates/></h2>
 </xsl:template>
 <xsl:template match="details">
     <ul class="details">
         <xsl:apply-templates/>
     </ul>
+</xsl:template>
+<xsl:template match="details[@display='inline']">
+    <div class="inline-details">
+        <xsl:apply-templates/>
+    </div>
+    <p></p>
+</xsl:template>
+<xsl:template match="item">
+    <li>
+        <xsl:apply-templates/>
+    </li>
+</xsl:template>
+<xsl:template match="experience">
+    <strong><xsl:value-of select="company|school"/></strong> &#8212; <i><xsl:value-of select="job-title|degree"/></i>
+    <br/>
+    <xsl:apply-templates select="dates"/>
+    <xsl:apply-templates select="details|list"/>
+</xsl:template>
+<xsl:template match="dates">
+    <div class="dates">
+        <small><xsl:value-of select="start"/> &#8211; <xsl:value-of select="end"/></small>
+    </div>
+</xsl:template>
+<xsl:template match="item/alt">
+    <li style="display: none;">
+        <xsl:apply-templates/>
+    </li>
 </xsl:template>
 <!-- <xsl:template>
 </xsl:template> -->
