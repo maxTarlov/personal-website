@@ -3,6 +3,7 @@
 <xsl:template match="/">
     <html>
     <head>
+        <link rel="stylesheet" href="/assets/css/style.css?v="/>
         <link rel="stylesheet" href="/assets/css/resume.css"/>
     </head>
     <body>
