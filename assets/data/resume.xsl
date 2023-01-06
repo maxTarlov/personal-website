@@ -7,7 +7,9 @@
         <link rel="stylesheet" href="/assets/css/resume.css"/>
     </head>
     <body>
-        <xsl:apply-templates/>
+        <div id="resume-body">
+            <xsl:apply-templates/>
+        </div>
     </body>
     </html>
 </xsl:template>
