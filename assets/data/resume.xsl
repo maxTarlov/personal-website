@@ -59,9 +59,7 @@
     </div>
 </xsl:template>
 <xsl:template match="item/alt">
-    <li style="display: none;">
-        <xsl:apply-templates/>
-    </li>
+    <!-- Intentionally blank -->
 </xsl:template>
 <!-- <xsl:template>
 </xsl:template> -->
