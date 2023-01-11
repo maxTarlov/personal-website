@@ -1,5 +1,8 @@
 const processor = new XSLTProcessor;
 let XMLData;
+let resumeConfig = {
+    defaultTunables: "item, job-title, degree"
+}
 
 function renderResume(XMLData) {
     HTMLResume = processor.transformToDocument(XMLData)
@@ -20,10 +23,10 @@ function renderResume(XMLData) {
     }
 }
 
-function extractText(resume, tweakableElements="item, job-title, degree") {
+function extractText(resume) {
     let $resume = $(resume);
     let result = [];
-    $resume.find(tweakableElements).contents().each(function (_, node) {
+    $resume.find(resumeConfig.defaultTunables).contents().each(function (_, node) {
         if (node.nodeType === 3) {result.push(node.textContent.trim());}
     })
     return result.join(' ');
