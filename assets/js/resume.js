@@ -84,11 +84,12 @@ function resumeCombinations(resumeDoc) {
             // let $thisAlt = $(altElem).clone();
             let $resumeCopy = $resume.clone();
 
-            let $itemSet = getUnlockedTunableSets($resumeCopy).eq(setIdx)
+            let $itemSet = getUnlockedTunableSets($resumeCopy).eq(setIdx);
+            let $targetAltElem = $itemSet.find(hiddenTags).eq(altIdx);
             $itemSet.attr("locked", "true");
             $itemSet.children().not(hiddenTags).attr("visibility", "hidden");
 
-            $itemSet.find(hiddenTags).eq(altIdx + 1).attr("visibility", "visible")
+            $targetAltElem.attr("visibility", "visible");
 
             // $visibleItem.empty()
             // $visibleItem.append($thisAlt.contents());
