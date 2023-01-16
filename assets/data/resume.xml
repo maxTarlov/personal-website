@@ -11,27 +11,27 @@
         <details display="inline">
             <tunable-set>
                 <item>Python</item>
-                <alt>Python (Programming Language)</alt>
-                <alt>
+                <item visibility="alternate">Python (Programming Language)</item>
+                <static-set visibility="alternate">
                     <item>Python</item>
                     <item>Numpy</item>
                     <item>Pandas</item>
-                </alt>
+                </static-set>
             </tunable-set>
             <tunable-set>
                 <item>SQL</item>
-                <alt>Structured Query Language</alt>
-                <alt>Structured Query Language (SQL)</alt>
+                <item visibility="alternate">Structured Query Language</item>
+                <item visibility="alternate">Structured Query Language (SQL)</item>
             </tunable-set>
             <tunable-set>
                 <item>JavaScript</item>
-                <alt>ECMAScript</alt>
-                <alt>ECMAScript (JavaScript)</alt>
+                <item visibility="alternate">ECMAScript</item>
+                <item visibility="alternate">ECMAScript (JavaScript)</item>
             </tunable-set>
             <tunable-set>
                 <item>Excel</item>
-                <alt>Microsoft Excel</alt>
-                <alt>MS Excel</alt>
+                <item visibility="alternate">Microsoft Excel</item>
+                <item visibility="alternate">MS Excel</item>
             </tunable-set>
             <item>Pivot Tables</item>
             <item>Linguistic Data Analysis</item>

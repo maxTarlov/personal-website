@@ -1,6 +1,6 @@
 const processor = new XSLTProcessor;
 let XMLData;
-let hiddenTags = "alt";
+let hiddenTags = "[visibility='alternate'], [visibility='hidden']";
 
 function renderResume(XMLData) {
     let HTMLResume = processor.transformToDocument(XMLData)
@@ -79,15 +79,19 @@ function resumeCombinations(resumeDoc) {
         return $(elem).find("tunable-set").not('[locked="true"]');
     }
 
-    getUnlockedTunableSets($resume).each((idx, tunableSet) => {
-        $(tunableSet).find(hiddenTags).each((_, thisAlt) => {
-            let $thisAlt = $(thisAlt).clone();
+    getUnlockedTunableSets($resume).each((setIdx, tunableSet) => {
+        $(tunableSet).find(hiddenTags).each((altIdx, altElem) => {
+            // let $thisAlt = $(altElem).clone();
             let $resumeCopy = $resume.clone();
-            let $itemSet = getUnlockedTunableSets($resumeCopy).eq(idx)
+
+            let $itemSet = getUnlockedTunableSets($resumeCopy).eq(setIdx)
             $itemSet.attr("locked", "true");
-            let $visibleItem = $itemSet.children().not(hiddenTags);
-            $visibleItem.empty()
-            $visibleItem.append($thisAlt.contents());
+            $itemSet.children().not(hiddenTags).attr("visibility", "hidden");
+
+            $itemSet.find(hiddenTags).eq(altIdx + 1).attr("visibility", "visible")
+
+            // $visibleItem.empty()
+            // $visibleItem.append($thisAlt.contents());
             // IMPORTANT use get(0) to get the underlying node
             renderResume($resumeCopy.get(0));
             resumeCombinations($resumeCopy);

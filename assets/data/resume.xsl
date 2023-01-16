@@ -58,7 +58,7 @@
         <small><xsl:value-of select="start"/> &#8211; <xsl:value-of select="end"/></small>
     </div>
 </xsl:template>
-<xsl:template match="alt">
+<xsl:template match="*[@visibility='alternate']|*[@visibility='hidden']">
     <!-- Intentionally blank -->
 </xsl:template>
 <!-- <xsl:template>
