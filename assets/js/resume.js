@@ -1,15 +1,9 @@
 const processor = new XSLTProcessor;
 let XMLData;
-let resumeConfig = {
-    defaultTunables: "item, job-title, degree",
-    alternateTunables: "alt"
-}
-resumeConfig.allTunables = [
-    resumeConfig.defaultTunables, resumeConfig.alternateTunables
-].join(', ');
+let hiddenTags = "alt";
 
 function renderResume(XMLData) {
-    HTMLResume = processor.transformToDocument(XMLData)
+    let HTMLResume = processor.transformToDocument(XMLData)
     .getElementById("resume-body");
 
     if(!(HTMLResume instanceof HTMLElement)) {
@@ -28,12 +22,15 @@ function renderResume(XMLData) {
 }
 
 function extractText(resume) {
-    let $resume = $(resume);
-    let result = [];
-    $resume.find(resumeConfig.defaultTunables).contents().each(function (_, node) {
-        if (node.nodeType === 3) {result.push(node.textContent.trim());}
-    })
-    return result.join(' ');
+    let $resumeCopy
+    if (resume instanceof XMLDocument) {
+        $resumeCopy = $(resume).find("data").clone();
+    }
+    else {
+        $resumeCopy = $(resume).clone();
+    }
+    $resumeCopy.find(hiddenTags).remove();
+    return $resumeCopy.text()
 }
 
 function scoreKeywords(docText, keywords) {
@@ -78,17 +75,22 @@ function resumeCombinations(resumeDoc) {
     let $resume = $(resumeDoc).clone();
     let result = [];
 
-    $resume.find(resumeConfig.defaultTunables).not('[locked="true"]')
-    .each((idx, item) => {
-        $(item).find(resumeConfig.alternateTunables).each((_, alt) => {
+    let getUnlockedTunableSets = (elem) => {
+        return $(elem).find("tunable-set").not('[locked="true"]');
+    }
+
+    getUnlockedTunableSets($resume).each((idx, tunableSet) => {
+        $(tunableSet).find(hiddenTags).each((_, thisAlt) => {
+            let $thisAlt = $(thisAlt).clone();
             let $resumeCopy = $resume.clone();
-            let $itemCopy = $resumeCopy.find(resumeConfig.defaultTunables)
-                .not('[locked="true"]').eq(idx);
-            $itemCopy.attr("locked", "true");
-            $itemCopy.empty()
-            $itemCopy.append($(alt).contents());
+            let $itemSet = getUnlockedTunableSets($resumeCopy).eq(idx)
+            $itemSet.attr("locked", "true");
+            let $visibleItem = $itemSet.children().not(hiddenTags);
+            $visibleItem.empty()
+            $visibleItem.append($thisAlt.contents());
             // IMPORTANT use get(0) to get the underlying node
             renderResume($resumeCopy.get(0));
+            resumeCombinations($resumeCopy);
         });
     });
 }
