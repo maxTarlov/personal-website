@@ -1,8 +1,12 @@
 const processor = new XSLTProcessor;
 let XMLData;
 let resumeConfig = {
-    defaultTunables: "item, job-title, degree"
+    defaultTunables: "item, job-title, degree",
+    alternateTunables: "alt"
 }
+resumeConfig.allTunables = [
+    resumeConfig.defaultTunables, resumeConfig.alternateTunables
+].join(', ');
 
 function renderResume(XMLData) {
     HTMLResume = processor.transformToDocument(XMLData)
@@ -68,6 +72,25 @@ function scoreResume(docText, keywords) {
     let keywordScore = scoreKeywords(docText, keywords);
     let lengthScore = scoreLength(docText);
     return (keywordScore + lengthScore)/2
+}
+
+function resumeCombinations(resumeDoc) {
+    let $resume = $(resumeDoc).clone();
+    let result = [];
+
+    $resume.find(resumeConfig.defaultTunables).not('[locked="true"]')
+    .each((idx, item) => {
+        $(item).find(resumeConfig.alternateTunables).each((_, alt) => {
+            let $resumeCopy = $resume.clone();
+            let $itemCopy = $resumeCopy.find(resumeConfig.defaultTunables)
+                .not('[locked="true"]').eq(idx);
+            $itemCopy.attr("locked", "true");
+            $itemCopy.empty()
+            $itemCopy.append($(alt).contents());
+            // IMPORTANT use get(0) to get the underlying node
+            renderResume($resumeCopy.get(0));
+        });
+    });
 }
 
 $(document).ready(async function() { 
