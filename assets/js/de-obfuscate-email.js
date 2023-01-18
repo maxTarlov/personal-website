@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     const email = ["nobots", "tarlov.dev"].join("@");
-    const href = ["mailto", email].join("@");
+    const href = ["mailto", email].join(":");
 
     function handle_interaction() {
         $(this).attr("href", href);
