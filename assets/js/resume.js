@@ -72,16 +72,20 @@ function scoreResume(docText, keywords) {
 }
 
 function resumeCombinations(resumeDoc) {
+    /* Accepts XML representation of a resume.
+     * Returns all combinations of alternate items (except original)
+     */
+
     const $resume = $(resumeDoc).clone();
 
     const $unlockedSets = $resume.find("tunable-set").not('[locked="true"]');
 
     if ($unlockedSets.length == 0) {
-        return []; // all all sets are locked
+        return []; // all all sets are locked, terminate recursion
     }
 
-    const $activeSet = $unlockedSets.first();
-    $activeSet.attr("locked", "true");
+    const $activeSet = $unlockedSets.first(); 
+    $activeSet.attr("locked", "true"); // flag activeSet as having been altered already
 
     let result = [];
      
@@ -96,15 +100,18 @@ function resumeCombinations(resumeDoc) {
         result.push($resumeCopy);
     }
 
+    // recursive on all of the variations of the active set
     for (let $resumeCopy of result) {
         result = result.concat(resumeCombinations($resumeCopy))
     }
 
+    // recursive on no change (to the active set)
     result = result.concat(resumeCombinations($resume))
 
     return result;
 
     function getActiveSetCopy($resumeCopy) {
+        // get copy of $activeSet in $resumeCopy
         let idx = $resume.find("tunable-set").index($activeSet);
         return $resumeCopy.find("tunable-set").eq(idx);
     }
