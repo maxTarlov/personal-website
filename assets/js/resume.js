@@ -72,32 +72,42 @@ function scoreResume(docText, keywords) {
 }
 
 function resumeCombinations(resumeDoc) {
-    let $resume = $(resumeDoc).clone();
-    let result = [];
+    const $resume = $(resumeDoc).clone();
 
-    let getUnlockedTunableSets = (elem) => {
-        return $(elem).find("tunable-set").not('[locked="true"]');
+    const $unlockedSets = $resume.find("tunable-set").not('[locked="true"]');
+
+    if ($unlockedSets.length == 0) {
+        return []; // all all sets are locked
     }
 
-    getUnlockedTunableSets($resume).each((setIdx, tunableSet) => {
-        $(tunableSet).find(hiddenTags).each((altIdx, altElem) => {
-            // let $thisAlt = $(altElem).clone();
-            let $resumeCopy = $resume.clone();
+    const $activeSet = $unlockedSets.first();
+    $activeSet.attr("locked", "true");
 
-            let $itemSet = getUnlockedTunableSets($resumeCopy).eq(setIdx);
-            let $targetAltElem = $itemSet.find(hiddenTags).eq(altIdx);
-            $itemSet.attr("locked", "true");
-            $itemSet.children().not(hiddenTags).attr("visibility", "hidden");
+    let result = [];
+     
+    for (let i = 0; i < $activeSet.find(hiddenTags).length; i++) {
+        let $resumeCopy = $resume.clone();
+        let $activeSetCopy = getActiveSetCopy($resumeCopy);
+        // ordering important! get current item >> hide all items >> unhide current item
+        let $currentItemCopy = $activeSetCopy.find(hiddenTags).eq(i);
+        $activeSetCopy.find("item").attr("visibility", "hidden");
+        $currentItemCopy.attr("visibility", "visible");
 
-            $targetAltElem.attr("visibility", "visible");
+        result.push($resumeCopy);
+    }
 
-            // $visibleItem.empty()
-            // $visibleItem.append($thisAlt.contents());
-            // IMPORTANT use get(0) to get the underlying node
-            renderResume($resumeCopy.get(0));
-            resumeCombinations($resumeCopy);
-        });
-    });
+    for (let $resumeCopy of result) {
+        result = result.concat(resumeCombinations($resumeCopy))
+    }
+
+    result = result.concat(resumeCombinations($resume))
+
+    return result;
+
+    function getActiveSetCopy($resumeCopy) {
+        let idx = $resume.find("tunable-set").index($activeSet);
+        return $resumeCopy.find("tunable-set").eq(idx);
+    }
 }
 
 $(document).ready(async function() { 
