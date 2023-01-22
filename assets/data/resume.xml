@@ -47,7 +47,10 @@
                 <end>Present</end>
             </dates>
             <details>
-                <item>Label customer support interactions for use in advanced natural language understanding models.</item>
+                <tunable-set>
+                    <item>Label customer support interactions for use in advanced natural language understanding models.</item>
+                    <item visibility="alternate"> Annotate customer support interactions for use in advanced natural language understanding models.</item>
+                </tunable-set>
                 <item>Learn about deep neural networks to optimize labeling process.</item>
                 <item>Collaborate with management to align taxonomies with business goals.</item>
             </details>
@@ -60,7 +63,10 @@
                 <end>December 2021</end>
             </dates>
             <details>
-                <item>Implemented labeling pipeline for classification of search result quality.</item>
+                <tunable-set>
+                    <item>Implemented labeling pipeline for classification of search result quality.</item>
+                    <item visibility="alternate">Implemented data annotation pipeline for classification of search result quality.</item>
+                </tunable-set>
                 <item>Improved annotation guidelines, leading to 15% increase in reliability.</item>
             </details>
         </experience>
