@@ -18,16 +18,8 @@
                     <item>Pandas</item>
                 </static-set>
             </tunable-set>
-            <tunable-set>
-                <item>SQL</item>
-                <item visibility="alternate">Structured Query Language</item>
-                <item visibility="alternate">Structured Query Language (SQL)</item>
-            </tunable-set>
-            <tunable-set>
-                <item>JavaScript</item>
-                <item visibility="alternate">ECMAScript</item>
-                <item visibility="alternate">ECMAScript (JavaScript)</item>
-            </tunable-set>
+            <item>SQL</item>
+            <item>JavaScript</item>
             <tunable-set>
                 <item>Excel</item>
                 <item visibility="alternate">Microsoft Excel</item>
@@ -35,7 +27,11 @@
             </tunable-set>
             <item>Pivot Tables</item>
             <item>Linguistic Data Analysis</item>
-            <item>Natural Language Processing</item>
+            <tunable-set>
+                <item>Natural Language Processing</item>
+                <item visibility="alternate">NLP</item>
+                <item visibility="alternate">Natural Language Processing (NLP)</item>
+            </tunable-set>
             <item>Research</item>
             <item>Succinct Writing</item>
             <item>Spanish</item>
