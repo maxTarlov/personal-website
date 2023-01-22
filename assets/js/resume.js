@@ -94,7 +94,7 @@ function resumeCombinations(resumeDoc) {
         let $activeSetCopy = getActiveSetCopy($resumeCopy);
         // ordering important! get current item >> hide all items >> unhide current item
         let $currentItemCopy = $activeSetCopy.find(hiddenTags).eq(i);
-        $activeSetCopy.find("item").attr("visibility", "hidden");
+        $activeSetCopy.children().attr("visibility", "hidden");
         $currentItemCopy.attr("visibility", "visible");
 
         result.push($resumeCopy);
