@@ -117,6 +117,36 @@ function resumeCombinations(resumeDoc) {
     }
 }
 
+function renderOptimalResume(keywords, resume=XMLData) {
+    let $originalResume;
+    if (resume instanceof XMLDocument) {
+        $originalResume = $(resume).find("data").clone();
+    }
+    else {
+        $originalResume = $(resume);
+    }
+
+    let combinations = resumeCombinations($originalResume);
+    let scores = combinations.map(x => scoreResume(extractText(x), keywords));
+    let optimalResumeIdx = scores.indexOf(Math.max(...scores));
+    let optimalResume = combinations[optimalResumeIdx].get(0);
+
+    if (scores[optimalResumeIdx] <= scoreResume(
+        extractText($originalResume), keywords)
+        ) {
+            console.debug('Original resume scores at least as good as "optimal resume"');
+            optimalResume = $originalResume.get(0);
+        }
+
+    console.debug("Optimal Resume Score: ", scores[optimalResumeIdx]);
+    let resumeText = extractText(optimalResume);
+    console.debug("Optimal Resume Keyword Score: ", scoreKeywords(resumeText, keywords));
+    console.debug("Optimal Resume Length Score: ", scoreLength(resumeText));
+
+    renderResume(optimalResume);
+    return optimalResume;
+}
+
 $(document).ready(async function() { 
     XMLData = await $.get("/assets/data/resume.xml").fail(function() {
         console.error("Failed to fetch XML resume")
