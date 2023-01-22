@@ -19,7 +19,21 @@
                 </static-set>
             </tunable-set>
             <item>SQL</item>
-            <item>JavaScript</item>
+            <tunable-set>
+                <item>JavaScript</item>
+                <static-set visibility="alternate">
+                    <item>HTML</item>
+                    <item>JavaScript</item>
+                    <tunable-set>
+                        <item>CSS</item>
+                        <item visibility="alternate">JSON</item>
+                        <static-set visibility="alternate">
+                            <item>XML</item>
+                            <item>XSLT</item>
+                        </static-set>
+                    </tunable-set>
+                </static-set>
+            </tunable-set>
             <tunable-set>
                 <item>Excel</item>
                 <item visibility="alternate">Microsoft Excel</item>

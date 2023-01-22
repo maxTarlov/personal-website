@@ -89,7 +89,7 @@ function resumeCombinations(resumeDoc) {
 
     let result = [];
      
-    for (let i = 0; i < $activeSet.find(hiddenTags).length; i++) {
+    for (let i = 0; i < $activeSet.children(hiddenTags).length; i++) {
         let $resumeCopy = $resume.clone();
         let $activeSetCopy = getActiveSetCopy($resumeCopy);
         // ordering important! get current item >> hide all items >> unhide current item
@@ -127,6 +127,7 @@ function renderOptimalResume(keywords, resume=XMLData) {
     }
 
     let combinations = resumeCombinations($originalResume);
+    console.debug("Number of combinations: ", combinations.length);
     let scores = combinations.map(x => scoreResume(extractText(x), keywords));
     let optimalResumeIdx = scores.indexOf(Math.max(...scores));
     let optimalResume = combinations[optimalResumeIdx].get(0);
