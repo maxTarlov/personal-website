@@ -25,11 +25,15 @@ function renderResume(XMLData) {
 function handleSubmit(event) {
     event.preventDefault();
     let keywords = nlp.tokenize(($("#keywords").val())).terms().out("array");
-    if (keywords.length > 0) {
-        renderOptimalResume(keywords);
-    }
-    else {
-        renderResume(XMLData);
+    $("#resume-body").replaceWith("<p id='resume-placeholder'>Loading...</p>");
+    setTimeout(helper, 0);
+    function helper () {
+        if (keywords.length > 0) {
+            renderOptimalResume(keywords);
+        }
+        else {
+            renderResume(XMLData);
+        }
     }
 }
 
