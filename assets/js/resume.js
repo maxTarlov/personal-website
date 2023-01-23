@@ -1,5 +1,6 @@
 const processor = new XSLTProcessor;
 let XMLData;
+let originalLength;
 let hiddenTags = "[visibility='alternate'], [visibility='hidden']";
 
 function renderResume(XMLData) {
@@ -23,7 +24,7 @@ function renderResume(XMLData) {
 
 function handleSubmit(event) {
     event.preventDefault();
-    let keywords = nlp(($("#keywords").val())).terms().out("array");
+    let keywords = nlp.tokenize(($("#keywords").val())).terms().out("array");
     if (keywords.length > 0) {
         renderOptimalResume(keywords);
     }
@@ -44,17 +45,16 @@ function extractText(resume) {
     return $resumeCopy.text()
 }
 
-function scoreKeywords(docText, keywords) {
+function scoreKeywords(doc, kwdsNormalized) {
     /* compiling the keywords makes lookups super fast, see:
      * https://observablehq.com/@spencermountain/compromise-match
      * We also need the keywords to be normalized.
      */
-    let kwdsNormalized = keywords.map(kw => nlp(kw).out('normal'));
     let kwdsCompiled = nlp.compile(kwdsNormalized);
 
     // count the occurances of each keyword
     let counts = {};
-    let doc = nlp(docText);
+    // let doc = nlp(docText);
     doc.lookup(kwdsCompiled).forEach(function (keyword) {
         let kw = keyword.out('normal');
         if (counts[kw]) {
@@ -68,19 +68,18 @@ function scoreKeywords(docText, keywords) {
     for (let x of Object.values(counts)) {
         result = result + 1 - 1/(1+x);
     }
-    return result/keywords.length;
+    return result/kwdsNormalized.length;
 }
 
-const originalLength = nlp(extractText(XMLData)).wordCount()
-
-function scoreLength(docText, optimalLength=originalLength) {
-    let x = (optimalLength - nlp(docText).wordCount())/optimalLength;
+function scoreLength(resumeLength, optimalLength=originalLength) {
+    let x = (optimalLength - resumeLength)/optimalLength;
     return 1/(1+x**2);
 }
 
-function scoreResume(docText, keywords) {
-    let keywordScore = scoreKeywords(docText, keywords);
-    let lengthScore = scoreLength(docText);
+function scoreResume(nlpDoc, normalizedKeywords) {
+    let keywordScore = scoreKeywords(nlpDoc, normalizedKeywords);
+    let wordCount = nlpDoc.wordCount();
+    let lengthScore = scoreLength(wordCount);
     return (keywordScore + lengthScore)/2
 }
 
@@ -141,12 +140,15 @@ function renderOptimalResume(keywords, resume=XMLData) {
 
     let combinations = resumeCombinations($originalResume);
     console.debug("Number of combinations: ", combinations.length);
-    let scores = combinations.map(x => scoreResume(extractText(x), keywords));
+
+    let kwdsNormalized = keywords.map(kw => nlp.tokenize(kw).out('normal'));
+    let scores = combinations.map(x => scoreResume(nlp(extractText(x)), kwdsNormalized));
+
     let optimalResumeIdx = scores.indexOf(Math.max(...scores));
     let optimalResume = combinations[optimalResumeIdx].get(0);
 
     if (scores[optimalResumeIdx] <= scoreResume(
-        extractText($originalResume), keywords)
+        nlp(extractText($originalResume)), keywords)
         ) {
             console.debug('Original resume scores at least as good as "optimal resume"');
             optimalResume = $originalResume.get(0);
@@ -154,15 +156,18 @@ function renderOptimalResume(keywords, resume=XMLData) {
 
     console.debug("Optimal Resume Score: ", scores[optimalResumeIdx]);
     let resumeText = extractText(optimalResume);
-    console.debug("Optimal Resume Keyword Score: ", scoreKeywords(resumeText, keywords));
-    console.debug("Optimal Resume Length Score: ", scoreLength(resumeText));
+    console.debug("Optimal Resume Keyword Score: ", scoreKeywords(nlp(resumeText), keywords));
+    console.debug("Optimal Resume Length Score: ", scoreLength(nlp(resumeText).wordCount()));
 
     renderResume(optimalResume);
     return optimalResume;
 }
 
 $(document).ready(async function() { 
-    XMLData = await $.get("/assets/data/resume.xml").fail(function() {
+    await $.get("/assets/data/resume.xml", function (data){
+        XMLData = data;
+        originalLength = nlp.tokenize(extractText(XMLData)).wordCount();
+    }).fail(function() {
         console.error("Failed to fetch XML resume")
     });
     $.get('assets/data/resume.xsl', function(data) {
