@@ -10,14 +10,25 @@ function renderResume(XMLData) {
         throw new Error("Failed to process XML with XSLTProcessor");
     } 
 
-    if($("#resume-redirect").length) {
-        $("#resume-redirect").replaceWith(HTMLResume);
+    if($("#resume-placeholder").length) {
+        $("#resume-placeholder").replaceWith(HTMLResume);
     }
     else if($("#resume-body").length) {
         $("#resume-body").replaceWith(HTMLResume);
     }
     else {
         throw new Error("Failed to find #resume-redirect or #resume-body");
+    }
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    let keywords = nlp(($("#keywords").val())).terms().out("array");
+    if (keywords.length > 0) {
+        renderOptimalResume(keywords);
+    }
+    else {
+        renderResume(XMLData);
     }
 }
 
@@ -60,8 +71,10 @@ function scoreKeywords(docText, keywords) {
     return result/keywords.length;
 }
 
-function scoreLength(docText, originalLength=nlp(extractText(XMLData)).wordCount()) {
-    let x = (originalLength - nlp(docText).wordCount())/originalLength;
+const originalLength = nlp(extractText(XMLData)).wordCount()
+
+function scoreLength(docText, optimalLength=originalLength) {
+    let x = (optimalLength - nlp(docText).wordCount())/optimalLength;
     return 1/(1+x**2);
 }
 
@@ -159,4 +172,6 @@ $(document).ready(async function() {
     }).fail(function() {
         console.error("Failed to fetch XSL stylesheet");
     });
+
+    $("#tuning-controls").submit(handleSubmit);
 });
