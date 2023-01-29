@@ -152,7 +152,7 @@ function renderOptimalResume(keywords, resume=XMLData) {
     let optimalResume = combinations[optimalResumeIdx].get(0);
 
     if (scores[optimalResumeIdx] <= scoreResume(
-        nlp(extractText($originalResume)), keywords)
+        nlp(extractText($originalResume)), kwdsNormalized)
         ) {
             console.debug('Original resume scores at least as good as "optimal resume"');
             optimalResume = $originalResume.get(0);
@@ -160,7 +160,7 @@ function renderOptimalResume(keywords, resume=XMLData) {
 
     console.debug("Optimal Resume Score: ", scores[optimalResumeIdx]);
     let resumeText = extractText(optimalResume);
-    console.debug("Optimal Resume Keyword Score: ", scoreKeywords(nlp(resumeText), keywords));
+    console.debug("Optimal Resume Keyword Score: ", scoreKeywords(nlp(resumeText), kwdsNormalized));
     console.debug("Optimal Resume Length Score: ", scoreLength(nlp(resumeText).wordCount()));
 
     renderResume(optimalResume);
