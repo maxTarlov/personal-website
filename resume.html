@@ -2,20 +2,16 @@
 layout: default
 title: Resume
 ---
-<link rel="stylesheet" href="/assets/css/resume.css"></style>
-<script src="https://unpkg.com/compromise@14.8"></script>
-<script src="/assets/js/resume.js"></script>
-<h1>Interactive Resume</h1>
-<p>
-    When applying for jobs, a common piece of advice is to fine-tune your resume for each job you are applying to. Recruiters often use ATS software to screen resumes before reading them, so applicants who make sure to use keywords found in the job description are more likely to get an interview. This interactive resume automatically fine-tunes itself based on keywords the user inputs. Try typing <code class="language-plaintext highlighter-rouge">NumPy</code> or <code class="language-plaintext highlighter-rouge">CSS</code> to see how my resume would differ for data scientist or full-stack developer jobs.
-</p>
-<form id="tuning-controls">
-    <input id="keywords" type="text" placeholder='Type some keywords here' size=25/>
-    <button type="submit">Submit</button>
-</form>
-<div id="resume" class="excerpt">
-    <p id="resume-placeholder">
-        <a href="/assets/data/resume.xml">Follow this link</a> if the resume does not load within a few seconds.
-    </p>
-</div>
+<div id="adobe-dc-view" style="width: 800px;"></div>
+<script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
+<script type="text/javascript">
+	document.addEventListener("adobe_dc_view_sdk.ready", function(){ 
+		var adobeDCView = new AdobeDC.View({clientId: "99179b25016c42a085384d1e46f572c5", divId: "adobe-dc-view"});
+		adobeDCView.previewFile({
+			content:{location: {url: "/assets/pdf/resume-no-phone.pdf"}},
+			metaData:{fileName: "Max Tarlov Resume.pdf"}
+		}, {embedMode: "IN_LINE"});
+	});
+</script>
 
+<p>Be sure to check out my <a href="/interactive-resume">interactive resume</a> too!</p>
