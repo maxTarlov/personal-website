@@ -9,6 +9,7 @@
     <section type="skills">
         <header>Skills</header>
         <details display="inline">
+            <item>Prompt Engineering</item>
             <tunable-set>
                 <item>Python</item>
                 <item visibility="alternate">Python (Programming Language)</item>
@@ -46,7 +47,7 @@
                 <item visibility="alternate">NLP</item>
                 <item visibility="alternate">Natural Language Processing (NLP)</item>
             </tunable-set>
-            <item>Research</item>
+            <item>Technocal Documentation</item>
             <item>Succinct Writing</item>
             <item>Spanish</item>
         </details>
@@ -62,11 +63,13 @@
             </dates>
             <details>
                 <tunable-set>
-                    <item>Label customer support interactions for use in advanced natural language understanding models.</item>
-                    <item visibility="alternate"> Annotate customer support interactions for use in advanced natural language understanding models.</item>
+                    <item>Piloted novel AI-assisted writing workflow used for training PaLM 2/Bard.</item>
+                    <item visibility="alternate">Labeled customer support interactions for use in advanced natural language understanding models.</item>
                 </tunable-set>
-                <item>Learn about deep neural networks to optimize labeling process.</item>
-                <item>Collaborate with management to align taxonomies with business goals.</item>
+                <tunable-set>
+                    <item>Collaborated with engineers and managers to create and maintain custom NLP training sets.</item>
+                    <item visibility="alternate">Collaborated with management to align taxonomies with business goals.</item>
+                </tunable-set>
             </details>
         </experience>
         <experience>
