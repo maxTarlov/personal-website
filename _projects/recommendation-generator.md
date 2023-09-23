@@ -1,6 +1,7 @@
 ---
 layout: page
 title: LinkedIn Recommendation Generator
+permalink: /recommendation-generator
 date: 2022-12-28
 ---
 
